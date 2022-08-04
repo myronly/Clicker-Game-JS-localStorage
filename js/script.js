@@ -7,7 +7,12 @@ const clickerPerSecond = document.querySelector(".clicker__seconds");
 const reset = document.querySelector(".reset");
 
 let count, perSecond;
-if (localStorage.getItem("count") !== null) {
+let amountArr = [];
+if (
+  localStorage.getItem("count") !== null &&
+  localStorage.getItem("perSecond") !== null &&
+  localStorage.getItem("amountPerSecond") !== null
+) {
   count = localStorage.getItem("count");
   perSecond = localStorage.getItem("perSecond");
   countClick.textContent = Math.trunc(count);
@@ -15,8 +20,11 @@ if (localStorage.getItem("count") !== null) {
 } else {
   count = 0;
   perSecond = 0;
-  countClick.textContent = 0;
-  clickerPerSecond.textContent = 0;
+  countClick.textContent = count;
+  clickerPerSecond.textContent = perSecond;
+  localStorage.setItem("count", count);
+  localStorage.setItem("perSecond", perSecond);
+  amountSet();
 }
 
 clicker.addEventListener("click", () => {
@@ -40,7 +48,13 @@ clickerUP.forEach((item) => {
   });
 });
 
-let amountArr = [];
+function amountSet() {
+  for (let i = 0; i < clickerUP.length; i++) {
+    amount = 0;
+    amountArr[i] = amount;
+    localStorage.setItem("amountPerSecond", amountArr);
+  }
+}
 for (let i = 0; i < clickerUP.length; i++) {
   let amount = 0;
   let amountArrGet = localStorage.getItem("amountPerSecond").split(",");
@@ -71,10 +85,6 @@ reset.addEventListener("click", () => {
   localStorage.setItem("perSecond", perSecond);
   countClick.textContent = Math.trunc(count);
   clickerPerSecond.textContent = perSecond;
-  for (let i = 0; i < clickerUP.length; i++) {
-    amount = 0;
-    amountArr[i] = amount;
-    localStorage.setItem("amountPerSecond", amountArr);
-  }
+  amountSet();
   window.location.reload();
 });
