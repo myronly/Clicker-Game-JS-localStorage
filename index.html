@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
     <title>Clicker</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,70 +11,70 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="images/cookie.png" type="image/x-icon" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="img/cookie.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.min.css" />
   </head>
-  <body>
-    <div class="wrapper">
-      <div class="clicker__wrapper">
-        <div class="clicker__count-container">
-          <p class="clicker__count">0</p>
-          <img class="clicker__count-icon" src="images/cookie.png" alt="cookie" />
-        </div>
-        <div class="clicker__btn-container">
-          <div class="clicker__btn-active">
-            <img class="clicker__btn" src="images/cookie.png" alt="cookie" />
-          </div>
-        </div>
-        <div class="clicker__seconds-container">
-          <span class="clicker__seconds">0</span><span>/sec</span>
-        </div>
-      </div>
-      <div class="clicker__shop">
-        <div class="clicker__shop-up">
-          <div class="clicker__shop-price">
-            <p>
-              <span class="clicker__shop-price-amount">0</span>
-              <span class="clicker__shop-price-count">0</span>
-            </p>
-            <img src="images/cookie.png" alt="cookie" />
-          </div>
-          <button class="clicker__shop-lvl" data-count="1" data-price="100">+1/sec</button>
-        </div>
-        <div class="clicker__shop-up">
-          <div class="clicker__shop-price">
-            <p>
-              <span class="clicker__shop-price-amount">0</span
-              ><span class="clicker__shop-price-count">0</span>
-            </p>
-            <img src="images/cookie.png" alt="cookie" />
-          </div>
-          <button class="clicker__shop-lvl" data-count="5" data-price="500">+5/sec</button>
-        </div>
-        <div class="clicker__shop-up">
-          <div class="clicker__shop-price">
-            <p>
-              <span class="clicker__shop-price-amount">0</span>
-              <span class="clicker__shop-price-count">0</span>
-            </p>
-            <img src="images/cookie.png" alt="cookie" />
-          </div>
-          <button class="clicker__shop-lvl" data-count="25" data-price="2500">+25/sec</button>
-        </div>
-        <div class="clicker__shop-up">
-          <div class="clicker__shop-price">
-            <p>
-              <span class="clicker__shop-price-amount">0</span>
-              <span class="clicker__shop-price-count">0</span>
-            </p>
 
-            <img src="images/cookie.png" alt="cookie" />
-          </div>
-          <button class="clicker__shop-lvl" data-count="125" data-price="12500">+125/sec</button>
-        </div>
-      </div>
-      <button class="reset" type="reset">Reset</button>
+  <body class="main__body">
+    <div class="wrapper">
+  <div class="clicker__wrapper">
+    <div class="clicker__count-container">
+      <p class="clicker__count">0</p>
+      <img class="clicker__count-icon" src="img/cookie.png" alt="cookie" />
     </div>
-    <script src="js/script.js"></script>
+    <div class="clicker__btn-container">
+      <img class="clicker__btn" src="img/cookie.png" alt="cookie" />
+    </div>
+    <div class="clicker__seconds-container">
+      <span class="clicker__seconds">0</span><span>/sec</span>
+    </div>
+  </div>
+  <div class="clicker__shop">
+    <div class="clicker__shop-up">
+      <div class="clicker__shop-price">
+        <p>
+          <span class="clicker__shop-price-amount">0</span>
+          <span class="clicker__shop-price-count">0</span>
+        </p>
+        <img src="img/cookie.png" alt="cookie" />
+      </div>
+      <div class="clicker__shop-lvl" data-count="1" data-price="100">+1/sec</div>
+    </div>
+    <div class="clicker__shop-up">
+      <div class="clicker__shop-price">
+        <p>
+          <span class="clicker__shop-price-amount">0</span
+          ><span class="clicker__shop-price-count">0</span>
+        </p>
+        <img src="img/cookie.png" alt="cookie" />
+      </div>
+      <div class="clicker__shop-lvl" data-count="5" data-price="500">+5/sec</div>
+    </div>
+    <div class="clicker__shop-up">
+      <div class="clicker__shop-price">
+        <p>
+          <span class="clicker__shop-price-amount">0</span>
+          <span class="clicker__shop-price-count">0</span>
+        </p>
+        <img src="img/cookie.png" alt="cookie" />
+      </div>
+      <div class="clicker__shop-lvl" data-count="25" data-price="2500">+25/sec</div>
+    </div>
+    <div class="clicker__shop-up">
+      <div class="clicker__shop-price">
+        <p>
+          <span class="clicker__shop-price-amount">0</span>
+          <span class="clicker__shop-price-count">0</span>
+        </p>
+        <img src="img/cookie.png" alt="cookie" />
+      </div>
+      <div class="clicker__shop-lvl" data-count="125" data-price="12500">+125/sec</div>
+    </div>
+  </div>
+  <button class="reset" type="reset">Reset</button>
+</div>
+
   </body>
+
+  <script src="./js/scripts.min.js"></script>
 </html>
