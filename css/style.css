@@ -10,6 +10,10 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 aside,
@@ -172,35 +176,26 @@ body.locked {
 }
 
 .wrapper .clicker__btn-container {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
   cursor: pointer;
   -webkit-animation: 30s spin infinite linear;
           animation: 30s spin infinite linear;
   border-radius: 100%;
-  user-select: none;
-}
-
-.wrapper .clicker__btn-container .click {
-  -webkit-transform: scale(1.07) !important;
-      -ms-transform: scale(1.07) !important;
-          transform: scale(1.07) !important;
 }
 
 .wrapper .clicker__btn {
-  width: 230px;
-  -webkit-transition: 0.15s all;
-  -o-transition: 0.15s all;
-  transition: 0.15s all;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  width: 235px;
+  -webkit-transition: 0.1s all;
+  -o-transition: 0.1s all;
+  transition: 0.1s all;
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
           transform: scale(1);
+}
+
+.wrapper .clicker__btn.click {
+  -webkit-transform: scale(0.9) !important;
+      -ms-transform: scale(0.9) !important;
+          transform: scale(0.9) !important;
 }
 
 .wrapper .clicker__seconds-container {
@@ -237,6 +232,13 @@ body.locked {
   gap: 5px;
 }
 
+.wrapper .clicker__shop-up .click-up {
+  -webkit-transform: scale(1.1);
+      -ms-transform: scale(1.1);
+          transform: scale(1.1);
+  opacity: 0.8;
+}
+
 .wrapper .clicker__shop-price {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -246,6 +248,9 @@ body.locked {
           align-items: center;
   gap: 3px;
   font-weight: 400;
+  -webkit-transition: 0.2s all;
+  -o-transition: 0.2s all;
+  transition: 0.2s all;
 }
 
 .wrapper .clicker__shop-price img {
@@ -295,23 +300,18 @@ body.locked {
   -o-transition: 0.2s all;
   transition: 0.2s all;
   cursor: pointer;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
-.wrapper .clicker__shop-lvl:hover {
-  opacity: 0.8;
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
 }
 
 .wrapper .not-enough {
   cursor: default !important;
-  opacity: 0.4;
+  opacity: 0.4 !important;
 }
 
 .wrapper .not-enough:hover {
-  opacity: 0.4;
+  opacity: 0.4 !important;
 }
 
 .wrapper .reset {
@@ -328,15 +328,19 @@ body.locked {
   font-size: 14px;
 }
 
-.wrapper .reset:hover {
-  opacity: 0.8;
-}
-
 @media (min-width: 767.98px) {
   .wrapper .clicker__btn:hover {
     -webkit-transform: scale(1.02);
         -ms-transform: scale(1.02);
             transform: scale(1.02);
+  }
+
+  .wrapper .clicker__shop-lvl:hover {
+    opacity: 0.8;
+  }
+
+  .wrapper .reset:hover {
+    opacity: 0.8;
   }
 }
 

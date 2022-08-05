@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let count, perSecond;
   let amountArr = [];
+
+  const PRICEINCREASE = 1.15;
+
   if (
     localStorage.getItem("count") !== null &&
     localStorage.getItem("perSecond") !== null &&
@@ -17,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ) {
     count = localStorage.getItem("count");
     perSecond = localStorage.getItem("perSecond");
-    countClick.textContent = Math.trunc(count);
+    countClick.textContent = Math.round(count);
     clickerPerSecond.textContent = perSecond;
   } else {
     count = 0;
@@ -31,32 +34,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   clicker.addEventListener("click", () => {
     localStorage.setItem("count", ++count);
-    countClick.textContent = Math.trunc(count);
+    countClick.textContent = Math.round(count);
     clicker.classList.add("click");
     if (clicker.classList.contains("click")) {
-      setTimeout(() => clicker.classList.remove("click"), 120);
-      console.log("ok");
+      setTimeout(() => clicker.classList.remove("click"), 50);
     }
   });
 
-  clickerUP.forEach((item) => {
+  for (let i = 0; i < clickerUP.length; i++) {
     setInterval(
       () =>
-        +item.dataset.price > count
-          ? item.classList.add("not-enough")
-          : item.classList.remove("not-enough"),
+        +clickerUP[i].dataset.price > count
+          ? clickerUP[i].classList.add("not-enough") ||
+            clickerUpAmount[i].parentNode.parentNode.classList.add("not-enough")
+          : clickerUP[i].classList.remove("not-enough") ||
+            clickerUpAmount[i].parentNode.parentNode.classList.remove("not-enough"),
       100
     );
-    item.addEventListener("click", () => {
-      if (+item.dataset.price <= count && !item.classList.contains("not-enough")) {
-        count -= +item.dataset.price;
-        perSecond = +perSecond + +item.dataset.count;
+    clickerUP[i].addEventListener("click", () => {
+      if (+clickerUP[i].dataset.price <= count && !clickerUP[i].classList.contains("not-enough")) {
+        count -= +clickerUP[i].dataset.price;
+        perSecond = +perSecond + +clickerUP[i].dataset.count;
         localStorage.setItem("perSecond", perSecond);
-        clickerPerSecond.textContent = +perSecond;
+        let STEP = 1;
+        const interval = setInterval(() => {
+          STEP = STEP * 1.5;
+          clickerPerSecond.textContent = Math.round(+clickerPerSecond.textContent + STEP);
+          if (+clickerPerSecond.textContent >= +localStorage.getItem("perSecond")) {
+            clearInterval(interval);
+            clickerPerSecond.textContent = +localStorage.getItem("perSecond");
+          }
+        }, 4);
         localStorage.setItem("count", count);
+        clickerUP[i].classList.add("click-up");
+        clickerUpAmount[i].parentNode.parentNode.classList.add("click-up");
+        if (clickerUP[i].classList.contains("click-up")) {
+          setTimeout(() => {
+            clickerUP[i].classList.remove("click-up");
+            clickerUpAmount[i].parentNode.parentNode.classList.remove("click-up");
+          }, 200);
+        }
       }
     });
-  });
+  }
 
   function amountSet() {
     for (let i = 0; i < clickerUP.length; i++) {
@@ -65,37 +85,52 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("amountPerSecond", amountArr);
     }
   }
+
   for (let i = 0; i < clickerUP.length; i++) {
     let amount = 0;
     let amountArrGet = localStorage.getItem("amountPerSecond").split(",");
     amount = amountArrGet[i];
     clickerUpAmount[i].textContent = amount + "x";
     amountArr.push(amount);
+    if (+amount !== 0) {
+      clickerUP[i].dataset.price = Math.round(clickerUP[i].dataset.price * PRICEINCREASE ** amount);
+    }
+    clickerUpCount[i].textContent = clickerUP[i].dataset.price;
     clickerUP[i].addEventListener("click", () => {
       if (!clickerUP[i].classList.contains("not-enough")) {
         clickerUpAmount[i].textContent = ++amount + "x";
         amountArr[i] = amount;
-        console.log(amountArr);
         localStorage.setItem("amountPerSecond", amountArr);
+        let STEP = 1;
+        const interval = setInterval(() => {
+          STEP = STEP * 1.5;
+          clickerUpCount[i].textContent = Math.round(+clickerUP[i].dataset.price + STEP);
+          if (
+            +clickerUpCount[i].textContent >= Math.round(clickerUP[i].dataset.price * PRICEINCREASE)
+          ) {
+            clearInterval(interval);
+            clickerUP[i].dataset.price = Math.round(clickerUP[i].dataset.price * PRICEINCREASE);
+            clickerUpCount[i].textContent = clickerUP[i].dataset.price;
+          }
+        }, 4);
       }
     });
-    clickerUpCount[i].textContent = clickerUP[i].dataset.price;
   }
 
   function perSecondInterval() {
     count = +count + +perSecond / 100;
     localStorage.setItem("count", count);
-    countClick.textContent = Math.trunc(count);
+    countClick.textContent = Math.round(count);
   }
-  const interval = setInterval(perSecondInterval, 10);
 
+  const interval = setInterval(perSecondInterval, 10);
   reset.addEventListener("click", () => {
     clearInterval(interval);
-    count = 10000;
+    count = 0;
     perSecond = 0;
     localStorage.setItem("count", count);
     localStorage.setItem("perSecond", perSecond);
-    countClick.textContent = Math.trunc(count);
+    countClick.textContent = Math.round(count);
     clickerPerSecond.textContent = perSecond;
     amountSet();
     window.location.reload();
