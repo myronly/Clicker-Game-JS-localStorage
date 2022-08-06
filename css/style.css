@@ -80,6 +80,7 @@ h6 {
 }
 
 body {
+  position: relative;
   color: #4b3a1b;
 }
 
@@ -132,8 +133,9 @@ body.locked {
 }
 
 .wrapper {
-  max-width: 600px;
-  margin: 50px auto;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 10px;
 }
 
 .wrapper .clicker__wrapper {
@@ -166,12 +168,12 @@ body.locked {
 }
 
 .wrapper .clicker__count {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 600;
 }
 
 .wrapper .clicker__count-icon {
-  width: 20px;
+  width: 30px;
   margin-left: 7px;
 }
 
@@ -183,7 +185,7 @@ body.locked {
 }
 
 .wrapper .clicker__btn {
-  width: 235px;
+  width: 260px;
   -webkit-transition: 0.1s all;
   -o-transition: 0.1s all;
   transition: 0.1s all;
@@ -199,12 +201,13 @@ body.locked {
 }
 
 .wrapper .clicker__seconds-container {
-  font-size: 18px;
-  padding-top: 15px;
+  font-size: 20px;
+  padding-top: 20px;
   font-weight: 500;
 }
 
 .wrapper .clicker__shop {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -214,8 +217,48 @@ body.locked {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding-top: 30px;
+  margin: 45px auto;
+  padding: 35px 10px 25px;
   gap: 10px;
+  border-bottom: 3px solid #4b3a1b;
+  border-radius: 10px;
+}
+
+.wrapper .clicker__shop-title-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  gap: 7px;
+  font-size: 24px;
+  font-weight: 500;
+  width: 100%;
+  height: 100%;
+  top: -14px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.wrapper .clicker__shop-title-wrapper div {
+  position: relative;
+  bottom: -11px;
+  width: 100%;
+  height: 100%;
+  border-top: 3px solid #4b3a1b;
+}
+
+.wrapper .clicker__shop-title-wrapper div:first-child {
+  border-top-left-radius: 10px;
+}
+
+.wrapper .clicker__shop-title-wrapper div:last-child {
+  border-top-right-radius: 10px;
+}
+
+.wrapper .clicker__shop-title {
+  white-space: nowrap;
 }
 
 .wrapper .clicker__shop-up {
@@ -368,8 +411,7 @@ body.locked {
   }
 
   .wrapper .clicker__shop {
-    margin: 0 auto;
-    width: 230px;
+    max-width: 290px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
