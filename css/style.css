@@ -156,6 +156,10 @@ body.locked {
   }
 }
 
+.wrapper {
+  overflow: hidden;
+}
+
 .wrapper__header {
   position: fixed;
   width: 100%;
@@ -458,8 +462,8 @@ body.locked {
 .cookie-bg {
   z-index: -1;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   background-size: 100%;
   background-image: url(../img/cookie.png);
 }

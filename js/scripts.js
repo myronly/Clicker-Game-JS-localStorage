@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
     navigator.userAgent
   )
-    ? isDesctopOrMobile("touchstart", "touchend", "touchcancel")
+    ? isDesctopOrMobile("touchstart", "click", "touchend")
     : isDesctopOrMobile("mousedown", "mouseup", "mouseleave");
 
   function isDesctopOrMobile(down, up, leave) {
@@ -94,24 +94,33 @@ document.addEventListener("DOMContentLoaded", () => {
       clicker.classList.add("click");
       const cookieBg = document.createElement("div");
       cookieBg.classList.add("cookie-bg");
-      let animTime = Math.random() * 5 + 5;
+      let animTime = Math.random() * 5 + 8;
       let leftRandom = Math.random() * 100;
       let scaleRandom = Math.random() + 1;
-      scaleRandom < 1.2 ? (scaleRandom += 0.2) : scaleRandom;
+      scaleRandom < 1.1 ? (scaleRandom += 0.1) : scaleRandom;
       cookieBg.style.cssText = `
       animation: fall ${animTime}s linear;
       left: ${leftRandom}%;
       transform: scale(${scaleRandom});`;
       cookieWrapper.append(cookieBg);
       setTimeout(() => cookieBg.remove(), +animTime * 1000);
+      clicker.addEventListener(leave, () => {
+        clicker.classList.remove("click");
+      });
     });
+    // let nowPerSecond = 0;
     clicker.addEventListener(up, () => {
+      clicker.classList.remove("click");
+      countClick.textContent = count.toFixed(1);
       count += +localStorage.getItem("perClick");
       localStorage.setItem("count", count);
-      countClick.textContent = count.toFixed(1);
-      clicker.classList.remove("click");
+      // nowPerSecond += +perClick;
+      // clickerPerSecond.textContent = (perSecond + nowPerSecond).toFixed(1);
+      // setTimeout(() => {
+      //   nowPerSecond -= +perClick;
+      //   clickerPerSecond.textContent = (nowPerSecond - perSecond).toFixed(1);
+      // }, 1000);
     });
-
     for (let i = 0; i < clickerUP.length; i++) {
       setInterval(() => {
         if (+clickerUP[i].dataset.price > count) {
