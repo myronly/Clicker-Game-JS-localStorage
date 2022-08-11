@@ -134,7 +134,7 @@ body.locked {
 
 @-webkit-keyframes fall {
   0% {
-    top: 5%;
+    top: 6%;
     opacity: 1;
   }
 
@@ -146,7 +146,7 @@ body.locked {
 
 @keyframes fall {
   0% {
-    top: 5%;
+    top: 6%;
     opacity: 1;
   }
 
@@ -221,13 +221,19 @@ body.locked {
   font-weight: 500;
 }
 
-.wrapper__header .clicker__seconds-container p:first-child {
-  padding-right: 10px;
-  border-right: RGB(99, 48, 15) 2px solid;
+.wrapper__header .clicker__seconds-container div {
+  background-color: RGB(99, 48, 15);
+  width: 2px;
+  height: 18px;
+}
+
+.wrapper__header .clicker__seconds-container p {
+  width: 100px;
+  text-align: center;
 }
 
 .wrapper__header .clicker__seconds-container p:last-child {
-  padding-left: 10px;
+  margin-left: 5px;
 }
 
 .wrapper__main {
@@ -262,9 +268,10 @@ body.locked {
 .wrapper__main .clicker__btn {
   width: 280px;
   height: 280px;
-  -webkit-transition: 0.1s all;
-  -o-transition: 0.1s all;
-  transition: 0.1s all;
+  border-radius: 100%;
+  -webkit-transition: 0.14s all;
+  -o-transition: 0.14s all;
+  transition: 0.14s all;
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
           transform: scale(1);
@@ -371,7 +378,7 @@ body.locked {
 }
 
 .wrapper__main .clicker__shop-price img {
-  width: 12px;
+  width: 15px;
 }
 
 .wrapper__main .clicker__shop-price p {
@@ -462,17 +469,17 @@ body.locked {
 .cookie-bg {
   z-index: -1;
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 23px;
+  height: 23px;
   background-size: 100%;
   background-image: url(../img/cookie.png);
 }
 
 @media (min-width: 767.98px) {
   .wrapper__main .clicker__btn:hover {
-    -webkit-transform: scale(1.02);
-        -ms-transform: scale(1.02);
-            transform: scale(1.02);
+    -webkit-transform: scale(1.03);
+        -ms-transform: scale(1.03);
+            transform: scale(1.03);
   }
 
   .wrapper__main .clicker__shop-lvl:hover {

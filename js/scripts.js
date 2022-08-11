@@ -1,27 +1,28 @@
 // Custom Scripts
+"use strict";
 document.addEventListener("DOMContentLoaded", () => {
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
     navigator.userAgent
   )
-    ? isDesctopOrMobile("touchstart", "click", "touchend")
+    ? isDesctopOrMobile("touchstart", "touchend", "touchend")
     : isDesctopOrMobile("mousedown", "mouseup", "mouseleave");
 
   function isDesctopOrMobile(down, up, leave) {
-    let count, perSecond;
-
+    let count, perSecond, perClick;
     const cookieWrapper = document.querySelector(".cookie-wrapper");
     const clickerShopPerClick = document.querySelector(".clicker__shop-per-click");
     const clickerShopPerSecond = document.querySelector(".clicker__shop-per-second");
 
-    const PRICE_INCREASE = 1.25;
-    const PER_SECOND_PRICE_ARR = [20, 100, 500, 2500, 12500];
-    const PER_SECOND_COUNT_ARR = [0.1, 1, 5, 25, 125];
+    const PRICE_INCREASE = 1.28;
     const PER_CLICK_PRICE_ARR = [50, 200, 1000, 5000, 20000];
     const PER_CLICK_COUNT_ARR = [0.1, 1, 5, 10, 25];
+    const PER_SECOND_PRICE_ARR = [20, 100, 500, 2500, 12500];
+    const PER_SECOND_COUNT_ARR = [0.1, 1, 5, 25, 125];
 
     function CreateUp(selector, length) {
       for (let i = 0; i < length.length; i++) {
         const element = document.createElement("div");
+        let perSecond, amountAndCount, name;
         element.classList.add("clicker__shop-up");
         if (selector.classList.contains("clicker__shop-per-click")) {
           perSecond = "clicker__shop-lvl-per-click";
@@ -63,64 +64,76 @@ document.addEventListener("DOMContentLoaded", () => {
     const clickerPerClick = document.querySelector(".clicker__clicks");
     const reset = document.querySelector(".reset");
 
-    if (
-      localStorage.getItem("count") !== null &&
-      localStorage.getItem("perSecond") !== null &&
-      localStorage.getItem("perClick") !== null &&
-      localStorage.getItem("perSecondUP") !== null &&
-      localStorage.getItem("perClickUP") !== null
-    ) {
-      count = +localStorage.getItem("count");
-      perSecond = +localStorage.getItem("perSecond");
-      perClick = +localStorage.getItem("perClick");
-      countClick.textContent = Math.round(count);
-      clickerPerSecond.textContent = perSecond.toFixed(1);
-      clickerPerClick.textContent = perClick.toFixed(1);
-    } else {
-      count = 0;
-      perSecond = 0;
-      perClick = 1;
-      countClick.textContent = count;
-      clickerPerSecond.textContent = perSecond.toFixed(1);
-      clickerPerClick.textContent = perClick.toFixed(1);
-      localStorage.setItem("count", count);
-      localStorage.setItem("perSecond", perSecond);
-      localStorage.setItem("perClick", perClick);
-      amountSet(clickerPerClickUP, "perClickUP");
-      amountSet(clickerPerSecondUP, "perSecondUP");
+    function checkout() {
+      if (
+        localStorage.getItem("count") !== null &&
+        localStorage.getItem("perSecond") !== null &&
+        localStorage.getItem("perClick") !== null &&
+        localStorage.getItem("perSecondUP") !== null &&
+        localStorage.getItem("perClickUP") !== null
+      ) {
+        count = +localStorage.getItem("count");
+        perSecond = +localStorage.getItem("perSecond");
+        perClick = +localStorage.getItem("perClick");
+        countClick.textContent = Math.round(count);
+        clickerPerSecond.textContent = perSecond.toFixed(1);
+        clickerPerClick.textContent = perClick.toFixed(1);
+      } else {
+        localStorage.setItem("count", (count = 0));
+        localStorage.setItem("perSecond", (perSecond = 0));
+        localStorage.setItem("perClick", (perClick = 1));
+        countClick.textContent = count;
+        clickerPerSecond.textContent = perSecond.toFixed(1);
+        clickerPerClick.textContent = perClick.toFixed(1);
+        amountSet(clickerPerClickUP, "perClickUP");
+        amountSet(clickerPerSecondUP, "perSecondUP");
+      }
     }
+    checkout();
 
     clicker.addEventListener(down, () => {
       clicker.classList.add("click");
-      const cookieBg = document.createElement("div");
-      cookieBg.classList.add("cookie-bg");
-      let animTime = Math.random() * 5 + 8;
-      let leftRandom = Math.random() * 100;
-      let scaleRandom = Math.random() + 1;
-      scaleRandom < 1.1 ? (scaleRandom += 0.1) : scaleRandom;
-      cookieBg.style.cssText = `
-      animation: fall ${animTime}s linear;
-      left: ${leftRandom}%;
-      transform: scale(${scaleRandom});`;
-      cookieWrapper.append(cookieBg);
-      setTimeout(() => cookieBg.remove(), +animTime * 1000);
       clicker.addEventListener(leave, () => {
         clicker.classList.remove("click");
       });
     });
-    // let nowPerSecond = 0;
-    clicker.addEventListener(up, () => {
+    clicker.addEventListener(up, (e) => {
       clicker.classList.remove("click");
       countClick.textContent = count.toFixed(1);
       count += +localStorage.getItem("perClick");
       localStorage.setItem("count", count);
-      // nowPerSecond += +perClick;
-      // clickerPerSecond.textContent = (perSecond + nowPerSecond).toFixed(1);
-      // setTimeout(() => {
-      //   nowPerSecond -= +perClick;
-      //   clickerPerSecond.textContent = (nowPerSecond - perSecond).toFixed(1);
-      // }, 1000);
+      const cookieBg = document.createElement("div");
+      cookieBg.classList.add("cookie-bg");
+      let animTimeRandom = Math.random() * 5 + 6.5;
+      let leftRandom = Math.random() * 100;
+      let scaleRandom = Math.random() + 1;
+      scaleRandom < 1.1 ? (scaleRandom += 0.1) : scaleRandom;
+      cookieBg.style.cssText = `
+      animation: fall ${animTimeRandom}s linear;
+      left: ${leftRandom}%;
+      transform: scale(${scaleRandom});`;
+      cookieWrapper.append(cookieBg);
+      setTimeout(() => cookieBg.remove(), +animTimeRandom * 1000);
     });
+
+    setInterval(() => {
+      let perSecondPrimary = count.toFixed(1);
+      setTimeout(() => {
+        let perSecondSecondary = count.toFixed(1);
+        let perSecondNow = +(perSecondSecondary - perSecondPrimary).toFixed(1);
+        if (perSecondNow >= +perSecond) {
+          if (
+            Math.round(perSecond) === Math.round(perSecondNow) ||
+            Math.floor(perSecond) === Math.floor(perSecondNow)
+          ) {
+            clickerPerSecond.textContent = perSecond.toFixed(1);
+          } else {
+            clickerPerSecond.textContent = perSecondNow.toFixed(1);
+          }
+        }
+      }, 1000);
+    }, 150);
+
     for (let i = 0; i < clickerUP.length; i++) {
       setInterval(() => {
         if (+clickerUP[i].dataset.price > count) {
@@ -151,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
               });
             }
           });
-          clickerUp[i].addEventListener(up, () => {
+          clickerUp[i].addEventListener("click", () => {
             if (
               +clickerUp[i].dataset.price <= count &&
               !clickerUp[i].classList.contains("not-enough")
@@ -183,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
               });
             }
           });
-          clickerUp[i].addEventListener(up, () => {
+          clickerUp[i].addEventListener("click", () => {
             if (
               +clickerUp[i].dataset.price <= count &&
               !clickerUp[i].classList.contains("not-enough")
@@ -225,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ).toFixed(1);
         }
         clickerUpCount[i].textContent = (+clickerUp[i].dataset.price).toFixed(1);
-        clickerUp[i].addEventListener(up, () => {
+        clickerUp[i].addEventListener("click", () => {
           if (!clickerUp[i].classList.contains("not-enough")) {
             clickerUpAmount[i].textContent = ++amount + "x";
             amountArr[i] = amount;
@@ -281,16 +294,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const interval = setInterval(perInterval, 10);
     reset.addEventListener("click", () => {
+      window.scrollTo(0, 0);
       clearInterval(interval);
-      count = 0;
-      perClick = 1;
-      perSecond = 0;
-      localStorage.setItem("count", count);
-      localStorage.setItem("perClick", perClick);
-      localStorage.setItem("perSecond", perSecond);
-      countClick.textContent = Math.round(count);
-      clickerPerSecond.textContent = perSecond;
-      clickerPerClick.textContent = perClick;
+      localStorage.setItem("count", (count = 10000));
+      localStorage.setItem("perClick", (perClick = 1));
+      localStorage.setItem("perSecond", (perSecond = 0));
+      countClick.textContent = count.toFixed(1);
+      clickerPerSecond.textContent = perSecond.toFixed(1);
+      clickerPerClick.textContent = perClick.toFixed(1);
       amountSet(clickerPerClickUP, "perClickUP");
       amountSet(clickerPerSecondUP, "perSecondUP");
       window.location.reload();
