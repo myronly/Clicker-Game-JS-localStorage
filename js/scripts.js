@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ? isDesctopOrMobile("touchstart", "touchend", "touchend")
     : isDesctopOrMobile("mousedown", "mouseup", "mouseleave");
 
+  window.addEventListener("click", (e) => {
+    e.preventDefault();
+  });
+
   function isDesctopOrMobile(down, up, leave) {
     let count, perSecond, perClick;
     const cookieWrapper = document.querySelector(".cookie-wrapper");
