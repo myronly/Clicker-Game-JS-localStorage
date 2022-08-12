@@ -1,7 +1,6 @@
 // Custom Scripts
 "use strict";
 document.addEventListener("DOMContentLoaded", () => {
-  alert("update 2.4: fix scale 2.6");
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
     navigator.userAgent
   )
