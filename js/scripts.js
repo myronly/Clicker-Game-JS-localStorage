@@ -1,7 +1,7 @@
 // Custom Scripts
 "use strict";
 document.addEventListener("DOMContentLoaded", () => {
-  alert('update 2.4: fix scale 2.2');
+  alert('update 2.4: fix scale 2.3');
   /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(
     navigator.userAgent
   )
@@ -130,8 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         let perSecondSecondary = count.toFixed(1);
         let perSecondNow = +(perSecondSecondary - perSecondPrimary).toFixed(1);
-        if (perSecondNow > +perSecond) {
+        console.log(perSecondNow, +perSecond);
+        if (perSecondNow >= +perSecond) {
           if (
+            +perSecond === perSecondNow ||
             Math.round(perSecond) === Math.round(perSecondNow) ||
             Math.floor(perSecond) === Math.floor(perSecondNow) ||
             Math.round(perSecond) === Math.floor(perSecondNow)
