@@ -101,7 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
         clicker.classList.remove("click");
       });
     });
-    clicker.addEventListener(up, (e) => {
+    // Fix zooming
+    clicker.addEventListener("click", () => {
+      clicker.classList.remove("click");
+    });
+    clicker.addEventListener(up, () => {
       clicker.classList.remove("click");
       countClick.textContent = count.toFixed(1);
       count += +localStorage.getItem("perClick");
@@ -128,7 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (perSecondNow >= +perSecond) {
           if (
             Math.round(perSecond) === Math.round(perSecondNow) ||
-            Math.floor(perSecond) === Math.floor(perSecondNow)
+            Math.floor(perSecond) === Math.floor(perSecondNow) ||
+            Math.round(perSecond) === Math.floor(perSecondNow)
           ) {
             clickerPerSecond.textContent = perSecond.toFixed(1);
           } else {
