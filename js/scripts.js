@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Math.round(perSecond) === Math.floor(perSecondNow)
           ) {
             clickerPerSecond.textContent = perSecond.toFixed(1);
+            alert(perSecond.toFixed(1) + " " + perSecondNow.toFixed(1));
           } else {
             clickerPerSecond.textContent = perSecondNow.toFixed(1);
           }
