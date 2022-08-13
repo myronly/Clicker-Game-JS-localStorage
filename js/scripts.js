@@ -7,21 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
     ? isDesctopOrMobile("touchstart", "touchend", "touchend")
     : isDesctopOrMobile("mousedown", "mouseup", "mouseleave");
 
-  window.addEventListener("click", (e) => {
-    e.preventDefault();
-  });
-
   function isDesctopOrMobile(down, up, leave) {
     let count, perSecond, perClick;
-    const cookieWrapper = document.querySelector(".cookie-wrapper");
+    const cookieBackground = document.querySelector(".clicker__background");
     const clickerShopPerClick = document.querySelector(".clicker__shop-per-click");
     const clickerShopPerSecond = document.querySelector(".clicker__shop-per-second");
 
     const PRICE_INCREASE = 1.28;
-    const PER_CLICK_PRICE_ARR = [50, 200, 1000, 5000, 20000];
-    const PER_CLICK_COUNT_ARR = [0.1, 1, 5, 10, 25];
-    const PER_SECOND_PRICE_ARR = [20, 100, 500, 2500, 12500];
-    const PER_SECOND_COUNT_ARR = [0.1, 1, 5, 25, 125];
+    const PER_CLICK_PRICE_ARR = [50, 200, 1000, 5000, 20000, 50000, 100000];
+    const PER_CLICK_COUNT_ARR = [0.1, 1, 5, 10, 25, 100, 250];
+    const PER_SECOND_PRICE_ARR = [20, 100, 500, 2500, 12500, 35000, 77500];
+    const PER_SECOND_COUNT_ARR = [0.1, 5, 10, 25, 125, 500, 1000];
 
     function CreateUp(selector, length) {
       for (let i = 0; i < length.length; i++) {
@@ -66,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const clickerPerSecond = document.querySelector(".clicker__seconds");
     const clickerPerClick = document.querySelector(".clicker__clicks");
+    const scrollTop = document.querySelector(".cookie__scroll-top");
     const reset = document.querySelector(".reset");
 
     function checkout() {
@@ -80,15 +77,23 @@ document.addEventListener("DOMContentLoaded", () => {
         perSecond = +localStorage.getItem("perSecond");
         perClick = +localStorage.getItem("perClick");
         countClick.textContent = Math.round(count);
-        clickerPerSecond.textContent = perSecond.toFixed(1);
-        clickerPerClick.textContent = perClick.toFixed(1);
+        perSecond >= 100
+          ? (clickerPerSecond.textContent = Math.round(perSecond))
+          : (clickerPerSecond.textContent = perSecond.toFixed(1));
+        perClick >= 10
+          ? (clickerPerClick.textContent = Math.round(perClick))
+          : (clickerPerClick.textContent = perClick.toFixed(1));
       } else {
         localStorage.setItem("count", (count = 0));
         localStorage.setItem("perSecond", (perSecond = 0));
         localStorage.setItem("perClick", (perClick = 1));
         countClick.textContent = count;
-        clickerPerSecond.textContent = perSecond.toFixed(1);
-        clickerPerClick.textContent = perClick.toFixed(1);
+        perSecond >= 100
+          ? (clickerPerSecond.textContent = Math.round(perSecond))
+          : (clickerPerSecond.textContent = perSecond.toFixed(1));
+        perClick >= 10
+          ? (clickerPerClick.textContent = Math.round(perClick))
+          : (clickerPerClick.textContent = perClick.toFixed(1));
         amountSet(clickerPerClickUP, "perClickUP");
         amountSet(clickerPerSecondUP, "perSecondUP");
       }
@@ -107,7 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     clicker.addEventListener(up, () => {
       clicker.classList.remove("click");
-      countClick.textContent = count.toFixed(1);
+      count >= 1000
+        ? (countClick.textContent = Math.round(count))
+        : (countClick.textContent = count.toFixed(1));
       count += +localStorage.getItem("perClick");
       localStorage.setItem("count", count);
       const cookieBg = document.createElement("div");
@@ -120,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
       animation: fall ${animTimeRandom}s linear;
       left: ${leftRandom}%;
       transform: scale(${scaleRandom});`;
-      cookieWrapper.append(cookieBg);
+      cookieBackground.append(cookieBg);
       setTimeout(() => cookieBg.remove(), +animTimeRandom * 1000);
     });
 
@@ -129,21 +136,27 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         let perSecondSecondary = count.toFixed(1);
         let perSecondNow = +(perSecondSecondary - perSecondPrimary).toFixed(1);
-        if (perSecondNow >= +perSecond) {
+        if (Math.round(perSecond) <= Math.round(perSecondNow)) {
           if (
             +perSecond === perSecondNow ||
             Math.round(perSecond) === Math.round(perSecondNow) ||
             Math.floor(perSecond) === Math.floor(perSecondNow) ||
             Math.round(perSecond) === Math.floor(perSecondNow)
           ) {
-            clickerPerSecond.textContent = perSecond.toFixed(1);
+            perSecond >= 100
+              ? (clickerPerSecond.textContent = Math.round(perSecond))
+              : (clickerPerSecond.textContent = perSecond.toFixed(1));
           } else {
-            clickerPerSecond.textContent = perSecondNow.toFixed(1);
+            perSecond >= 100
+              ? (clickerPerSecond.textContent = Math.round(perSecondNow))
+              : (clickerPerSecond.textContent = perSecondNow.toFixed(1));
           }
         } else {
-          clickerPerSecond.textContent = perSecond.toFixed(1);
+          perSecond >= 100
+            ? (clickerPerSecond.textContent = Math.round(perSecond))
+            : (clickerPerSecond.textContent = perSecond.toFixed(1));
         }
-      }, 1000);
+      }, 998);
     }, 150);
 
     for (let i = 0; i < clickerUP.length; i++) {
@@ -185,7 +198,9 @@ document.addEventListener("DOMContentLoaded", () => {
               perClick += +clickerUp[i].dataset.count;
               localStorage.setItem("count", count);
               localStorage.setItem("perClick", perClick);
-              clickerPerClick.textContent = perClick.toFixed(1);
+              perClick >= 10
+              ? (clickerPerClick.textContent = Math.round(perClick))
+              : (clickerPerClick.textContent = perClick.toFixed(1));
               clickerUp[i].classList.remove("click-up");
               clickerUpAmount[i].parentNode.parentNode.classList.remove("click-up");
             }
@@ -219,14 +234,20 @@ document.addEventListener("DOMContentLoaded", () => {
               let STEP = 1;
               const interval = setInterval(() => {
                 STEP = STEP * 1.5;
-                clickerPerSecond.textContent = Math.round(
-                  +clickerPerSecond.textContent + STEP
-                ).toFixed(1);
+                perSecond >= 100
+                  ? (clickerPerSecond.textContent = Math.round(
+                      +clickerPerSecond.textContent + STEP
+                    ))
+                  : (clickerPerSecond.textContent = clickerPerSecond.textContent =
+                      (+clickerPerSecond.textContent + STEP).toFixed(1));
                 if (+clickerPerSecond.textContent >= +localStorage.getItem("perSecond")) {
                   clearInterval(interval);
-                  clickerPerSecond.textContent = Number(localStorage.getItem("perSecond")).toFixed(
-                    1
-                  );
+                  perSecond >= 100
+                    ? (clickerPerSecond.textContent = Math.round(
+                        Number(localStorage.getItem("perSecond"))
+                      ))
+                    : (clickerPerSecond.textContent = clickerPerSecond.textContent =
+                        Number(localStorage.getItem("perSecond")).toFixed(1));
                 }
               }, 4);
               localStorage.setItem("count", count);
@@ -276,6 +297,25 @@ document.addEventListener("DOMContentLoaded", () => {
     perUP(clickerPerClickUP, clickerPerClickUPAmount, clickerPerClickUPCount, "perClickUP");
     perUP(clickerPerSecondUP, clickerPerSecondUpAmount, clickerPerSecondUPCount, "perSecondUP");
 
+    // clicker.scrollHeight
+    window.addEventListener("scroll", () => {
+      if (window.scrollY < 200) {
+        scrollTop.style.bottom = -60 + "px";
+        scrollTop.style.opacity = 0;
+        scrollTop.firstElementChild.classList.remove("click");
+      } else {
+        scrollTop.style.bottom = 80 + "px";
+        scrollTop.style.opacity = 1;
+      }
+      scrollTop.addEventListener("click", () => {
+        scrollTop.firstElementChild.classList.add("click");
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+    });
+
     function amountSet(amountUP, getUP) {
       let amount = 0;
       let amountArr = [];
@@ -288,7 +328,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function perInterval() {
       count = +count + +perSecond / 100;
       localStorage.setItem("count", count);
-      countClick.textContent = count.toFixed(1);
+      count >= 1000
+        ? (countClick.textContent = Math.round(count))
+        : (countClick.textContent = count.toFixed(1));
+
       if (
         clickerPerClickUP[0].parentNode.parentNode.classList.contains("clicker__shop-per-click")
       ) {
@@ -308,7 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
     reset.addEventListener("click", () => {
       window.scrollTo(0, 0);
       clearInterval(interval);
-      localStorage.setItem("count", (count = 10000));
+      localStorage.setItem("count", (count = 0));
       localStorage.setItem("perClick", (perClick = 1));
       localStorage.setItem("perSecond", (perSecond = 0));
       countClick.textContent = count.toFixed(1);

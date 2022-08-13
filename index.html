@@ -21,21 +21,40 @@
   <body class="main__body">
     <div class="wrapper">
   <header class="wrapper__header">
-    <div class="clicker__count-container">
-      <p class="clicker__count">0</p>
-      <img class="clicker__count-icon" src="img/cookie.png" alt="cookie" />
+    <div class="header__main">
+      <div class="clicker__count-container">
+        <p class="clicker__count">0</p>
+        <img class="clicker__count-icon" src="img/cookie.png" alt="cookie" />
+      </div>
+      <div class="clicker__seconds-container">
+        <p><span class="clicker__seconds">0</span><span>/sec</span></p>
+        <div></div>
+        <p><span class="clicker__clicks">1</span><span>/click</span></p>
+      </div>
     </div>
-    <div class="clicker__seconds-container">
-      <p><span class="clicker__seconds">0</span><span>/sec</span></p>
-      <div></div>
-      <p><span class="clicker__clicks">1</span><span>/click</span></p>
-    </div>
+    <!-- <div class="header__stats">
+      <button class="header__stats-btn">Stats</button>
+    </div> -->
   </header>
 
   <main class="wrapper__main">
     <section class="clicker__wrapper">
       <div class="clicker__btn-container">
         <div class="clicker__btn"></div>
+      </div>
+      <div class="cookie__scroll-top">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="52"
+          height="52"
+          viewBox="0 0 32 32"
+        >
+          <path
+            fill="RGB(99, 48, 15)"
+            d="M22.086 20.914l2.829-2.829-8.914-8.914-8.914 8.914 2.828 2.828 6.086-6.086z"
+          ></path>
+        </svg>
       </div>
     </section>
     <section class="clicker__shop">
@@ -55,7 +74,7 @@
       </div>
       <button class="reset" type="reset">Reset</button>
     </section>
-    <section class="cookie-wrapper"></section>
+    <section class="clicker__background"></section>
   </main>
 </div>
 
