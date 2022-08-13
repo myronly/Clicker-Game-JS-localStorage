@@ -199,8 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
               localStorage.setItem("count", count);
               localStorage.setItem("perClick", perClick);
               perClick >= 10
-              ? (clickerPerClick.textContent = Math.round(perClick))
-              : (clickerPerClick.textContent = perClick.toFixed(1));
+                ? (clickerPerClick.textContent = Math.round(perClick))
+                : (clickerPerClick.textContent = perClick.toFixed(1));
               clickerUp[i].classList.remove("click-up");
               clickerUpAmount[i].parentNode.parentNode.classList.remove("click-up");
             }
@@ -270,7 +270,9 @@ document.addEventListener("DOMContentLoaded", () => {
             PRICE_INCREASE ** amount
           ).toFixed(1);
         }
-        clickerUpCount[i].textContent = (+clickerUp[i].dataset.price).toFixed(1);
+        +clickerUp[i].dataset.price >= 1000
+          ? (clickerUpCount[i].textContent = Math.round(+clickerUp[i].dataset.price))
+          : (clickerUpCount[i].textContent = (+clickerUp[i].dataset.price).toFixed(1));
         clickerUp[i].addEventListener("click", () => {
           if (!clickerUp[i].classList.contains("not-enough")) {
             clickerUpAmount[i].textContent = ++amount + "x";
@@ -280,14 +282,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const priceIncreasePrimary = +clickerUp[i].dataset.price;
             const interval = setInterval(() => {
               STEP = STEP * 1.5;
-              clickerUpCount[i].textContent = (+clickerUp[i].dataset.price + STEP).toFixed(1);
+              +clickerUp[i].dataset.price >= 1000
+                ? (clickerUpCount[i].textContent = Math.round(+clickerUp[i].dataset.price + STEP))
+                : (clickerUpCount[i].textContent = (+clickerUp[i].dataset.price + STEP).toFixed(1));
               if (
                 +clickerUpCount[i].textContent >=
                 Math.round(clickerUp[i].dataset.price * PRICE_INCREASE)
               ) {
                 clearInterval(interval);
                 clickerUp[i].dataset.price = priceIncreasePrimary * PRICE_INCREASE;
-                clickerUpCount[i].textContent = (+clickerUp[i].dataset.price).toFixed(1);
+                +clickerUp[i].dataset.price >= 1000
+                  ? (clickerUpCount[i].textContent = Math.round(+clickerUp[i].dataset.price))
+                  : (clickerUpCount[i].textContent = (+clickerUp[i].dataset.price).toFixed(1));
               }
             }, 4);
           }

@@ -460,9 +460,9 @@ body.locked {
   color: RGB(99, 48, 15);
   background-color: RGB(252, 192, 130);
   border: 2px solid RGB(99, 48, 15);
-  -webkit-transition: 0.2s all;
-  -o-transition: 0.2s all;
-  transition: 0.2s all;
+  -webkit-transition: 0.2s all ease;
+  -o-transition: 0.2s all ease;
+  transition: 0.2s all ease;
   cursor: pointer;
   -webkit-transform: scale(1);
       -ms-transform: scale(1);
@@ -558,7 +558,15 @@ body.locked {
   }
 
   .wrapper__main .clicker__shop-lvl:hover {
-    opacity: 0.8;
+    color: RGB(252, 192, 130);
+    background-color: RGB(99, 48, 15);
+    border: 2px solid #e6cea0;
+  }
+
+  .wrapper__main .clicker__shop-lvl.not-enough:hover {
+    color: RGB(99, 48, 15);
+    background-color: RGB(252, 192, 130);
+    border: 2px solid RGB(99, 48, 15);
   }
 
   .wrapper__main .reset:hover {
